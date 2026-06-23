@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>오버워치 랜덤 조합</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+}
+.result {
+    margin-top: 20px;
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+
+<h1>오버워치 랜덤 조합 생성기</h1>
+<button onclick="generate()">조합 뽑기</button>
+
+<div class="result" id="result"></div>
+
+<script>
+const tanks = [
+    "D.Va","둠피스트","레킹볼","윈스턴","해저드",
+    "로드호그","마우가","오리사","자리야",
+    "도미나","라마트라","라인하르트","시그마","정커퀸"
+];
+
+const dps = [
+    "메이","바스티온","솔저:76","시메트라","엠레",
+    "정크랫","토르비온","솜브라","시에라","에코",
+    "파라","프레야","겐지","리퍼","벤테라",
+    "벤처","시온","안란","트레이서","소전",
+    "애쉬","위도우메이커","캐서디","한조"
+];
+
+const supports = [
+    "루시우","바티스트","아나","제트팩 캣","젠야타",
+    "라이프위버","메르시","모이라","키리코",
+    "미즈키","브리기테","우양","일리아리","주노"
+];
+
+function sample(arr, n){
+    const copy = [...arr];
+    const result = [];
+    for(let i=0;i<n;i++){
+        const idx = Math.floor(Math.random()*copy.length);
+        result.push(copy[idx]);
+        copy.splice(idx,1);
+    }
+    return result;
+}
+
+function generate(){
+    const tank = tanks[Math.floor(Math.random()*tanks.length)];
+    const dpsPick = sample(dps, 2);
+    const supportPick = sample(supports, 2);
+
+    document.getElementById("result").innerHTML = `
+        <p><b>탱커</b>: ${tank}</p>
+        <p><b>딜러</b>: ${dpsPick.join(", ")}</p>
+        <p><b>서포터</b>: ${supportPick.join(", ")}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
